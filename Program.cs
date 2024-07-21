@@ -1,80 +1,79 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //
 // Progammer Name: John Holt 
-// Company: Acme Distributors
-// Program Date: 07/20/2024
+// Company: Coins R US Distributors
+// Program Date: 07/21/2024
 // Program Description: Restocking Tool
 
-        int beginsodas = 100;
-        int restocksodas = 40;
-        int currentsodas = 0;
-        int beginchips = 40;
-        int restockchips = 20;
-        int currentchips = 0;
-        int begincandy = 60;
-        int restockcandy = 40;
-        int currentcandy = 0;
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+public static class RestockingTool
+{
+    public static void Main()
+    {
+
         string inputstring;
-        int inputint = 0;
+        string name;
+        string heads = "HEADS";
+        string tails = "TAILS";
+        int correct = 0;
 
-        Console.WriteLine("Welcome to the Acme Distributors restocking tool.");
+        Console.WriteLine("Welcome to the COIN FLIP CHALLENGE! \nWhat is your name?");
+        name = Console.ReadLine();
 
 
-        // SODAS
-        Console.WriteLine(" ");
-        Console.WriteLine("How many Sodas have been sold today? There are " + beginsodas + " in stock.");
+        Console.WriteLine("Welcome " + name + ". Do you want to do the COIN FLIP CHALLENGE? Yes/No");
         inputstring = Console.ReadLine();
-        inputint = int.Parse(inputstring);
-        currentsodas = beginsodas - inputint;
-        if (currentsodas < 0)
-        {
-            Console.WriteLine("That value is too high. Stock not adjusted.");
-            currentsodas = beginsodas;
-        }
+        inputstring = inputstring.ToUpper();
+
+        if (inputstring == "NO")
+        { Console.WriteLine("You are a coward " + name); }
         else
-        { Console.WriteLine("There are " + currentsodas + " Sodas left."); }
-
-        //CHIPS
-        Console.WriteLine(" ");
-        Console.WriteLine("How many Chips have been sold today? There are " + beginchips + " in stock.");
-        inputstring = Console.ReadLine();
-        inputint = int.Parse(inputstring);
-        currentchips = beginchips - inputint;
-
-        if (currentchips < 0)
         {
-            Console.WriteLine("That value is too high. Stock not adjusted.");
-            currentchips = beginchips;
+
+            for (int i = 0; i < 5; i++)
+            {
+
+                Console.WriteLine("Heads or Tails?");
+                inputstring = Console.ReadLine();
+                inputstring = inputstring.ToUpper();
+
+                Random random = new Random();
+                int number = random.Next(0, 2); // Generates a random integer between 0 and 1
+
+                // Heads = 1
+                // Tails = 0
+
+                if (number == 1)
+                {
+                    if (inputstring == heads)
+                    {
+                        Console.WriteLine("Correct!" + number);
+                        correct++;
+                    }
+                    else
+                    { Console.WriteLine("Wrong!" + number); }
+                }
+
+                else
+                {
+                    if (inputstring == tails)
+                    {
+                        Console.WriteLine("Correct!" + number);
+                        correct++;
+                    }
+                    else
+                    { Console.WriteLine("Wrong!" + number); }
+
+                }
+
+
+            }
+            Console.WriteLine("Thank you " + name + ". You got a score of " + correct);
         }
-        else
-        { Console.WriteLine("There are " + currentchips + " Chips left."); }
-
-        //CANDY 
-        Console.WriteLine(" ");
-        Console.WriteLine("How many Candy have been sold today? There are " + begincandy + " in stock.");
-        inputstring = Console.ReadLine();
-        inputint = int.Parse(inputstring);
-        currentcandy = begincandy - inputint;
-
-        if (currentcandy < 0)
-        {
-            Console.WriteLine("That value is too high. Stock not adjusted.");
-            currentcandy = begincandy;
-        }
-        else
-        { Console.WriteLine("There are " + currentcandy + " Candy left."); }
+    }
+}
 
 
-        Console.WriteLine(" ");
-        Console.WriteLine(" ");
-        Console.WriteLine(" ");
-        Console.WriteLine("Thank you for filling out the values. Here’s what needs to be restocked.");
-        if (currentsodas < restocksodas)
-        { Console.WriteLine("Sodas needs to be restocked."); }
-        if (currentchips < restockchips)
-        { Console.WriteLine("Chips needs to be restocked."); }
-        if (currentcandy < restockcandy)
-        { Console.WriteLine("Candy needs to be restocked."); }
 
-        Console.WriteLine(" ");
-        Console.WriteLine("Goodbye!");
